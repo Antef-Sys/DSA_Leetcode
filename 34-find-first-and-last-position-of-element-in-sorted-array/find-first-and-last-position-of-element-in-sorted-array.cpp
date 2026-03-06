@@ -1,48 +1,36 @@
-class Solution {
-
-int firstoccurrence(vector<int>& nums, int target){
-    int s=0;
-        int e = nums.size()-1;
-        int ans = -1;
-        while(s<=e){
-            int mid=s+(e-s)/2;
-            if(nums[mid]==target){
-                ans=mid;
-                e=mid-1;
-            }
-            else if(target < nums[mid]){
-                e = mid-1;
-            }
-            else{
-                s=mid+1;
-            }
-        }
-        return ans;
-}    
-
-int lastoccurrence(vector<int>& nums, int target){
-    int s=0;
-        int e = nums.size()-1;
-        int ans=-1;
-        while(s<=e){
-            int mid=s+(e-s)/2;
-            if(nums[mid]==target){
-                ans=mid;
-                s=mid+1;
-            }
-            else if(target>nums[mid]){
-                s=mid+1;
-            }
-            else{
-                e=mid-1;
-            }
-        }
-        return ans;
-} 
+class Solution { 
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        int first=firstoccurrence(nums,target);
-        int last=lastoccurrence(nums,target);
+
+        int s = 0;
+        int e = nums.size() - 1;
+        int first = -1;
+        int last = -1;
+
+        while(s <= e){
+
+            if(first == -1){
+                if(nums[s] == target){
+                    first = s;
+                }
+                else{
+                    s++;
+                }
+            }
+
+            if(last == -1){
+                if(nums[e] == target){
+                    last = e;
+                }
+                else{
+                    e--;
+                }
+            }
+
+            if(first != -1 && last != -1)
+                break;
+        }
+
         return {first,last};
     }
 };
